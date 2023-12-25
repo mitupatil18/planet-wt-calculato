@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-image: url(https://images.unsplash.com/photo-1543722530-d2c3201371e7?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;font-size: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        select,
+        input[type="submit"] {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        img {
+            max-width: 50%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <label for="mass" >Enter mass in kg</label>
+    <input type="text" id="mass"> kg
+
+    <label for="planets">Choose a planet</label>
+    <select name="planets" id="planets" style="font-size: 20px;">
+        <option value="Mercury">Mercury</option>
+        <option value="Venus">Venus</option>
+        <option value="Earth">Earth</option>
+        <option value="Mars">Mars</option>
+        <option value="Jupiter">Jupiter</option>
+        <option value="Saturn">Saturn</option>
+        <option value="Uranus">Uranus</option>
+        <option value="Neptune">Neptune</option>
+    </select>
+
+    <br><br>
+
+    <input type="submit" style="font-size: 20px;" value="Calculate weight" id="find">   
+    <br>
+    <img id="img-p" src="https://img.freepik.com/free-photo/glowing-spaceship-orbits-planet-starry-galaxy-generated-by-ai_188544-9655.jpg?w=1060&t=st=1703476526~exp=1703477126~hmac=a968e24400425f3fb6b56565dcbfd22bc17e6a8b6b09f3f4acf2b6068f6b3b03" alt="Planet Image"> 
+    <p style="font-size: 25px;">Weight is <span id="wt">0</span></p>
+
+    <script>
+        document.getElementById("find").addEventListener("click", () => {
+            const mass = parseFloat(document.getElementById("mass").value);
+            const planet = document.getElementById("planets").value;
+            const planetImage = document.getElementById("img-p");
+
+            let gravityMultiplier;
+
+            switch(planet) {
+                case 'Mercury': gravityMultiplier = 3.7;
+                                planetImage.src = 'https://img.freepik.com/free-photo/solar-system-planet-collage_23-2150188986.jpg?w=1380&t=st=1703476318~exp=1703476918~hmac=ef7b03c1cc5e7c865e1e698f2cace7b541d1768c3d628b7e670eb1f9bd59ad2d';
+                                break;
+                case 'Venus': gravityMultiplier = 8.87;
+                                planetImage.src = 'https://img.freepik.com/free-photo/solar-system-planet-collage_23-2150188951.jpg?w=1380&t=st=1703476296~exp=1703476896~hmac=3930b30a68cab896bd4d5265e9f54e20bb45426e66d3091c93e957a5f8d1bdc4';
+                                break;
+                case 'Earth': gravityMultiplier = 9.8;
+                                planetImage.src = 'https://img.freepik.com/free-photo/solar-system-planet-collage_23-2150188992.jpg?w=1380&t=st=1703476272~exp=1703476872~hmac=7704adb610b906388643e554d3dbb1583929f877780c925ee96afdd898600e2c';
+                                break;
+                case 'Mars': gravityMultiplier = 3.71;
+                                planetImage.src = 'https://img.freepik.com/free-photo/solar-system-planet-collage_23-2150188957.jpg?w=1380&t=st=1703476150~exp=1703476750~hmac=62df06e79f962cabd3214463b147b9cc3e88bda29a85a8a4699088c6ddb31fad';
+                                break;
+                case 'Jupiter': gravityMultiplier = 24.79;
+                                planetImage.src = 'https://img.freepik.com/free-photo/solar-system-planet-collage_23-2150188966.jpg?w=1380&t=st=1703476203~exp=1703476803~hmac=b69d7af1ab3a1a62caa3baabbc362d2d974eef834b6a06c4a8ee8c75cfb397a7';
+                                break;
+                case 'Saturn': gravityMultiplier = 10.44;
+                                planetImage.src = 'https://img.freepik.com/free-photo/solar-system-planet-collage_23-2150188972.jpg?w=1380&t=st=1703476339~exp=1703476939~hmac=f808a2bd9bfdc2b695a6c84c211996cd34b05b38ff718041fefbe58806efdb8b';
+                                break;
+                case 'Uranus': gravityMultiplier = 8.69;
+                                planetImage.src = 'https://img.freepik.com/free-photo/solar-system-planet-collage_23-2150188976.jpg?w=1380&t=st=1703476361~exp=1703476961~hmac=607d4facfe9be702ae9297883304a3bdc41c4c3e598c5cd383602e7f190b26a4';
+                                break;
+                case 'Neptune': gravityMultiplier = 11.15;
+                                planetImage.src = 'https://img.freepik.com/premium-photo/solar-system-planet-collage_23-2150188980.jpg?w=1380';
+                                break;
+                default: // Handle unexpected values
+                    gravityMultiplier = 1;
+                    planetImage.src = 'https://via.placeholder.com/400?text=Unknown';
+            }
+
+            const weight = mass * gravityMultiplier;
+            document.getElementById("wt").innerHTML = Math.round(weight);
+        });
+    </script>
+</body>
+</html>
